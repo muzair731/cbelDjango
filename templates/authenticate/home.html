@@ -1,0 +1,61 @@
+{% extends 'authenticate/base.html' %}
+{% load static %}
+{% block content %}
+<center><div style="width: 95%;">
+<h1 class="text-center">Welcome</h1>
+</br>
+
+<!-- <p class="text-center"><small>Please <a href="{% url 'login' %}">Login</a></small></p>
+</br>
+<div><a img src="{% static 'logo.png' %}" alt="logo"></a></div>-->
+{% if user.is_authenticated %}
+	<!-- <h3 class="text-center"> {{ user.first_name }}'s Enrolled Courses</h3> 
+	</br> -->
+	<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card h-100">
+      <img src="{% static 'course1.png' %}" class="card-img-top" alt="my_image">
+      <div class="card-body">
+        <h5 class="card-title">Course 1</h5>
+        <p class="card-text">Click to access content</p> 
+      </div>
+      <div class="card-footer">
+        <div class="d-grid gap-2">
+  			<a href="{% url 'course1_content' %}" class="btn btn-dark">Click Here</a>
+		</div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <img src="{% static 'course1.png' %}" class="card-img-top" alt="my_image">
+      <div class="card-body">
+        <h5 class="card-title">Course 2</h5>
+        <p class="card-text">Click to access content</p>
+      </div>
+      <div class="card-footer">
+       <div class="d-grid gap-2">
+  			<a href="{% url 'course2_content' %}" class="btn btn-dark">Click Here</a>
+		</div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <img src="{% static 'course1.png' %}" class="card-img-top" alt="my_image">
+      <div class="card-body">
+        <h5 class="card-title">Course 3</h5>
+        <p class="card-text">Click to access content</p>
+      </div>
+      <div class="card-footer">
+        <div class="d-grid gap-2">
+  			<a href="{% url 'course3_content' %}" class="btn btn-dark">Click Here</a>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ {% endif %}
+</div></center>
+{% endblock %}

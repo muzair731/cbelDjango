@@ -1,0 +1,28 @@
+{% extends 'authenticate/base.html' %}
+{% load static %}
+{% block content %}
+{% if user.is_authenticated %}
+	<center>
+		{% if perms.contact.view_sendemail %}
+		<div style="width: 95%;">
+		<h1>Email</h1>
+		<form method="POST">
+			{% csrf_token %}
+		<table>
+		<div class="form-group">	
+		<p><label for="id_email" class="form-label">Email:</label><input type="email" class="form-control" name="email" required id="id_email" ></p>
+		<p><label for="id_subject"  class="form-label">Subject:</label><input type="text" name="subject" class="form-control" required id="id_subject"></p>
+		<p><label for="id_message">Message:</label><textarea class="form-control" name="message" cols="40" rows="10" required id="id_message">
+		</textarea></p>
+		</table> 
+		</br>
+		<button class="btn btn-dark">Send</button>
+		</div>
+		</form>
+		</div>
+		{% else %}
+		<p>You Dont Have Access</p>
+		{% endif %}
+	</center>	
+ {% endif %}
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'authenticate/base.html' %}
+{% block content %}
+<center><div style="width: 95%;">
+{% if user.is_authenticated %}
+
+	<h1 class="text-center">Notice Board</h1>
+	{% if perms.todo %} 
+		{% if perms.todo.add_list %}
+			<form class="d-flex" method="POST">
+				{% csrf_token %}
+		
+			
+	        	<input class="form-control me-2" type="search" placeholder="Announcement" aria-label="Search" name="item">
+	        	<button class="btn btn-dark" type="submit">Add</button>
+	     	</form>
+	     {% endif %}	
+	 </br>
+	     
+	     {% if all_items %}
+	     	<table class="table table-dark table-striped">
+	     	{% for things in all_items %}
+	     		{% if things.completed %}
+	     			
+			     		<tr class="table-secondary">
+			     			<td  class="striker"><cite title="Source Title">{{ things.date_added }}</cite>: <h6>{{ things.item }}</h6></td>
+			     			{% if perms.todo.delete_list %}
+			     			<td width="100px"><center><a href="{% url 'edit' things.id %}"><button class="btn btn-secondary" type="submit">Edit</button></a></center></td>
+			     			<td width="100px"><center><a href="{% url 'delete' things.id %}"><button class="btn btn-secondary" type="submit">Delete</button></a></center></td>
+			     			{% endif %}
+			   			</tr>
+		   			
+	     		{% else %}
+	     			
+		     			<tr>
+			     			<td><cite title="Source Title">{{ things.date_added }}</cite>: <h6> {{ things.item }}</h6></td>
+			     			{% if perms.todo.delete_list %}
+			     			<td width="100px"><center><a href="{% url 'edit' things.id %}"><button class="btn btn-secondary" type="submit">Edit</button></a></center></td>
+			     			<td width="100px"><center><a href="{% url 'delete' things.id %}"><button class="btn btn-secondary" type="submit">Delete</button></a></center></td>
+			     			{% endif %}
+			   			</tr>
+   					
+				{% endif %}		  
+	     	{% endfor %}
+	     	</table>	
+	     {% endif %}
+	    {% endif %} 
+ {% endif %}
+</div></center>
+{% endblock %}

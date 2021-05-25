@@ -1,0 +1,44 @@
+{% extends 'authenticate/base.html' %}
+{% load static %}
+{% block content %}
+{% if user.is_authenticated %}
+<center><div style="width: 95%;">
+<center><h1>{{ post.title }} <a href="{% url 'blog_update' post.pk %}"><button type="button" class="btn btn-secondary btn-sm">Edit post</button></a></h1></center><hr>
+<!-- <small>By: {{ post.author.first_name }} {{ post.author.last_name }}</small><hr><br/> -->
+<figure class="text-center">
+  <blockquote class="blockquote">
+    <p>{{ post.body }}</p>
+  </blockquote>
+  <figcaption class="blockquote-footer">
+    <cite title="Source Title">{{ post.author.first_name }} {{ post.author.last_name }} <br/>
+  	{{ post.date_added }}</cite>
+  </figcaption>
+</figure>
+<hr>
+<!--{{ post.body }} - <a href="{% url 'blog_update' post.pk %}">Edit</a><br/>
+<br/> -->
+</div></center>
+<center><div style="width: 95%;">
+{% if not post.comments.all %}
+	<h1>Comments: <a href="{% url 'blog_comment' post.pk %}"><button type="button" class="btn btn-secondary btn-sm">Add Comment</button></a></h1>
+	<cite title="Source Title">No Comments Yet</cite>
+	<br/>
+{% else %}
+	<h1>Comments: <a href="{% url 'blog_comment' post.pk %}"><button type="button" class="btn btn-secondary btn-sm">Add Comment</button></a></h1>
+	
+	{% for comment in post.comments.all %}
+		<p class="h5">{{ comment.name }} - {{ comment.date_added }}: </p>
+		<blockquote class="blockquote">
+		  <p>{{ comment.body }}</p>
+		</blockquote>
+		<hr>
+		 
+		<!-- {{ comment.name }} - {{ comment.date_added }}<br/>
+		{{ comment.body }} -->
+	{% endfor %}
+	<br/>
+{% endif %}
+</div></center>
+<!-- <a href="{% url 'blog_content' %}" class="btn btn-dark">Back</a> -->
+{% endif %}
+{% endblock %}

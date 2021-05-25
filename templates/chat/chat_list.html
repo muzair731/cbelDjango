@@ -1,0 +1,36 @@
+{% extends 'authenticate/base.html' %}
+
+{% block content %}
+<div>
+<center><div style="border: solid 3px black; width: 90% ">
+    <p align="right" style="margin-right: 10px; margin-top: 5px;"><a href="/chat"><button class="btn btn btn-dark"><i class="fa fa-refresh" aria-hidden="true"></i>
+    Rerfresh</button></a></p><br>
+
+    {% for chat in object_list %}
+
+        <center><div class="chat" role="alert" style="width: 50%; background: rgb(192, 196, 204); border: solid 2px black; " aria-live="assertive" aria-atomic="true">
+    		{% if chat.user.is_superuser %}
+        		<div class="toast-header"> 
+                    <strong class="me-auto">{{ chat.user }}- Admin</strong>
+                    <small class="chat-date">{{ chat.posted_at }}</small> 
+                </div>     
+    		{% else %}
+                <div class="toast-header"> 
+                    <strong class="chat-user-special">{{ chat.user }}</strong>
+                    <small class="chat-date">{{ chat.posted_at }}</small>
+                </div>     
+    		{% endif %}
+            <div class="toast-body">
+                {{ chat|linebreaks }}
+            </div>
+    	</div></center><br>
+
+    {% empty %}
+    <center><p class="heading">No Chats Yet Be The First To Message!</p><br></center>
+
+    {% endfor %}
+    <center><br><a href="{% url 'chat:new' %}"><button class="btn btn btn-dark" style="margin-bottom: 5px;">New Message</button></a></center>
+</div></center>  
+</div>  
+
+{% endblock %}

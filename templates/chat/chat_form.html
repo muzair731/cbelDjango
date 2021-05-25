@@ -1,0 +1,12 @@
+{% extends 'authenticate/base.html' %}
+
+{% block content %}
+    <form method="POST">
+	    {% csrf_token %}
+	    <center><div class="form-floating">
+	    	<small>Enter Message:</small>		
+		  <textarea class="form-control" placeholder="Message" name="message" style="width: 60%; height: 250px;"></textarea>
+		</div></center></br>
+    	<center><input type="submit" value="Send" class="btn btn btn-dark"></center>
+    </form>
+{% endblock content %}

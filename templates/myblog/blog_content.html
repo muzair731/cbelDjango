@@ -1,0 +1,24 @@
+{% extends 'authenticate/base.html' %}
+{% load static %}
+{% block content %}
+{% if user.is_authenticated %}
+<!-- <h1>Post</h1>
+<hr> -->
+<br/>
+<center><a href="{% url 'blog_add' %}" class="btn btn-dark btn-lg">Add Blog</a></center>
+<hr>
+<ul style="margin-right: 25px;">
+<table class="table table-dark table-striped" >
+	{% for post in object_list %}
+
+	<tr class="table-secondary" >
+		<td><h5>{{ post.title }}</h5>By: {{ post.author.first_name }} {{ post.author.last_name }}<br/>Created On: {{ post.date_added }}</td>
+		<td width="100px"><center><a href="{% url 'blog_detail' post.pk %}"><button class="btn btn-dark" type="submit">View Post</button></a></center></td>
+		<td width="100px"><center><a href="{% url 'blog_update' post.pk %}"><button class="btn btn-dark" type="submit">Update</button></a></center></td>
+	</tr>	
+	
+	{% endfor %}
+</table>
+</ul>
+{% endif %}
+{% endblock %}

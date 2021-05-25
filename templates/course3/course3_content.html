@@ -1,0 +1,56 @@
+{% extends 'authenticate/base.html' %}
+{% load static %}
+{% block content %}
+<h1 class="text-center">Welcome</h1>
+{% if user.is_authenticated %}
+	<h1 class="text-center">Course Content</h1>
+	<div class="container mt-5">
+		{% if perms.course2.add_file_upload %}
+		<form enctype="multipart/form-data" action="{% url 'course3_content' %}" method="POST">
+			{% csrf_token %}
+		  <div class="mb-3">
+		    <label for="{{ form.file_name.id_for_label }}" class="form-label">File Name</label>
+		    {{ form.file_name }}
+		  </div>
+		  <div class="mb-3">
+		    <label for="{{ form.files_data.id_for_label }}" class="form-label">File</label>
+		    {{ form.files }}
+		  </div>
+		  <button type="submit" class="btn btn-secondary">Submit</button>
+		</form>
+		{% endif %}
+	</div>
+</br>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<table class="table">
+					<thead>
+			    <tr>
+			      <th>Uploaded on: </th>
+			      <th>Name</th>
+			      <th>Size</th>
+			      <th>File Link</th>
+
+			    </tr>
+			  </thead>
+			  <tbody>
+			    
+			    {% for d in all_data %}
+			    <tr>
+			      <th><cite title="Source Title">{{ d.date_added }}</cite></th>
+			      <th>{{ d.file_name }}</th>
+			      <th>{{ d.my_file.size }} bytes</th>
+			      <th width="100px"><center><a href="{{ d.my_file.url }}"><button class="btn btn-secondary" type="submit">View/Download</button></a></center></th>
+			  
+			      <!-- <th><a href="{{ d.my_file.url }}"> {{ d.my_file }}</a></th> -->
+			    </tr>
+			    {% endfor %}
+			    
+			  </tbody>
+			</table>
+			</div>
+		</div>
+	</div>
+ {% endif %}
+{% endblock %}

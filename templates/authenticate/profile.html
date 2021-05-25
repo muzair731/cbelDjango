@@ -1,0 +1,29 @@
+{% extends 'authenticate/base.html' %}
+{% block content %}
+<h1 class="text-center">{{ user.first_name }} {{ user.last_name }}'s Profile</h1>
+<div class="col-md-6 offset-md-3">
+	<form method="POST" action="{% url 'profile' %}">
+		{% csrf_token %}
+		{% if form.errors %}
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            	<p>Your form has errors</p>
+            	{% for field in form %}
+            		{% if field.errors %}
+            			{{ field.errors }}
+            		{% endif %}
+            	{% endfor %}
+          	</div>
+		{% endif %}
+		<!-- {{ form.as_p }} -->
+		<p><label for="id_username">Username:</label> <input type="text" name="username" value="admin1" maxlength="150" class="form-control" required id="id_username" disabled></p>
+		<p><label for="id_first_name">First name:</label> <input type="text" name="first_name" value="Muhammad" class="form-control" maxlength="100" required id="id_first_name"></p>
+		<p><label for="id_last_name">Last name:</label> <input type="text" name="last_name" value="Uzair" class="form-control" maxlength="100" required id="id_last_name"></p>
+		<p><label for="id_email">Email:</label> <input type="text" name="email" value="chuzair1236@gmail.com" class="form-control" required id="id_email"><input type="hidden" name="password" value="pbkdf2_sha256$216000$QVGTnO2Bgc3O$Q/1mO9VFiY7YftnXhXHG9HWuFeyhc6DPZq60aH1yQZU=" id="id_password"></p>
+		<p class="fs-5"><small><a href="{% url 'change_password' %}">Click here</a> To change your Password</small></p>
+
+		
+		<input type="submit" value="Edit Profile" class="btn btn-dark">	
+	</form>
+</div>
+{% endblock %}
