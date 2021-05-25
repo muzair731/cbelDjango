@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class TodoConfig(AppConfig):
-    name = 'todo'
+class AnnouncementsConfig(AppConfig):
+    name = 'Announcements'

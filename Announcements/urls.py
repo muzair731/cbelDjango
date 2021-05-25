@@ -18,7 +18,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('home_todo/',views.home, name="home_todo"),
+    path('announcements/',views.home, name="home_todo"),
     path('delete/<list_id>',views.delete, name="delete"),
     path('cross_off/<list_id>',views.cross_off, name="cross_off"),
     path('uncross/<list_id>',views.uncross, name="uncross"),
